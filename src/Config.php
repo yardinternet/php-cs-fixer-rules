@@ -97,7 +97,7 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
     }
 
     /**
-     * Recursively unset matching rules
+     * Unset matching rules
      *
      * @param array<int, string> $rulesKeys
      */
@@ -108,5 +108,13 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         $this->setRules(array_diff_key($rules, array_flip($rulesKeys)));
 
         return $this;
+    }
+
+    /**
+     * Removes rule name
+     */
+    public function removeRule(string $ruleKey): self
+    {
+        return $this->removeRules([$ruleKey]);
     }
 }
