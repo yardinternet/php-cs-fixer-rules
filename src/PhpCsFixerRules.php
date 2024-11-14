@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Yard\SkeletonPackage;
+namespace Yard\PhpCsFixerRules;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
 use Webmozart\Assert\Assert;
 
-class Example
+class PhpCsFixerRules
 {
     /**
-     * Create a new Example instance.
+     * Create a new PhpCsFixerRules instance.
      */
     public function __construct(protected Application $app)
     {
@@ -22,7 +22,7 @@ class Example
      */
     public function getQuote(): string
     {
-        $quotes = config('skeleton-package.quotes');
+        $quotes = config('php-cs-fixer-rules.quotes');
 
         Assert::isArray($quotes);
 
