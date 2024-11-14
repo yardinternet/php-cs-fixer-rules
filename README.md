@@ -29,6 +29,7 @@ To install this package using Composer, follow these steps:
 
 ## Usage
 
+Simple example:
 ```php
 <?php
 
@@ -45,10 +46,34 @@ $finder = Finder::create()
     ->exclude('build')
 ;
 
-return \Yard\PhpCsFixerRules\Config::setFinder($finder)
-	->mergeRules([ // allows you to add new rules or override rules from default
- 		'declare_strict_types' => false, 
-	])
-	->setRiskyAllowed(false) // override and disable risky setting for old projects
-	->get();
+return \Yard\PhpCsFixerRules\Config::create($finder);
 ```
+
+More complex:
+```php
+<?php
+
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
+    ->in(__DIR__)
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true)
+    ->exclude('public')
+    ->exclude('node_modules')
+    ->exclude('build')
+;
+
+return \Yard\PhpCsFixerRules\Config::create($finder)
+	->mergeRules([
+		'yoda_style' => [
+			'equal' => false,
+		],
+	])
+	->removeRule('declare_strict_types')
+	->removeRules(['no_unused_imports', 'trailing_comma_in_multiline'])
+	->setRiskyAllowed(false); // disable this for old sites!
+```
+
