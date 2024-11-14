@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Yard\SkeletonPackage;
+namespace Yard\PhpCsFixerRules;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Yard\SkeletonPackage\Console\ExampleCommand;
+use Yard\PhpCsFixerRules\Console\PhpCsFixerRulesCommand;
 
-class SkeletonPackageServiceProvider extends PackageServiceProvider
+class PhpCsFixerRulesServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('skeleton-package')
+            ->name('php-cs-fixer-rules')
             ->hasConfigFile()
             ->hasViews()
-            ->hasCommand(ExampleCommand::class);
+            ->hasCommand(PhpCsFixerRulesCommand::class);
     }
 
     public function packageRegistered(): void
     {
-        $this->app->singleton('Example', fn () => new Example($this->app));
+        $this->app->singleton('PhpCsFixerRules', fn () => new PhpCsFixerRules($this->app));
     }
 
     public function packageBooted(): void
     {
-        $this->app->make('Example');
+        $this->app->make('PhpCsFixerRules');
     }
 }

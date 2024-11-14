@@ -1,7 +1,7 @@
 {
-	"name": "yard/skeleton-package",
+	"name": "yard/php-cs-fixer-rules",
 	"type": "package",
-	"description": ":package_description",
+	"description": "Yard PHP CS Fixer rules",
   "version": "1.0.0",
 	"license": "MIT",
   "config": {
@@ -24,12 +24,12 @@
 	},
   "autoload": {
 		"psr-4": {
-			"Yard\\SkeletonPackage\\": "src/"
+			"Yard\\PhpCsFixerRules\\": "src/"
 		}
 	},
   "autoload-dev": {
 		"psr-4": {
-			"Yard\\SkeletonPackage\\Tests\\": "tests/"
+			"Yard\\PhpCsFixerRules\\Tests\\": "tests/"
 		}
 	},
   "scripts": {
@@ -44,10 +44,10 @@
 	"extra": {
 		"acorn": {
 			"providers": [
-				"Yard\\SkeletonPackage\\SkeletonPackageServiceProvider"
+				"Yard\\PhpCsFixerRules\\PhpCsFixerRulesServiceProvider"
 			],
 			"aliases": {
-				"Example": "Yard\\SkeletonPackage\\Facades\\Example"
+				"PhpCsFixerRules": "Yard\\PhpCsFixerRules\\Facades\\PhpCsFixerRules"
 			}
 		}
 	}

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Yard\SkeletonPackage\Console;
+namespace Yard\PhpCsFixerRules\Console;
 
 use Illuminate\Console\Command;
-use Yard\SkeletonPackage\Facades\Example;
+use Yard\PhpCsFixerRules\Facades\PhpCsFixerRules;
 
-class ExampleCommand extends Command
+class PhpCsFixerRulesCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'example';
+    protected $signature = 'phpcsfixerrules';
 
     /**
      * The console command description.
@@ -29,7 +29,7 @@ class ExampleCommand extends Command
     public function handle(): void
     {
         $this->info(
-            Example::getQuote()
+            PhpCsFixerRules::getQuote()
         );
     }
 }
