@@ -68,45 +68,45 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         parent::__construct($name);
     }
 
-	/**
-	 * Creates default PHP CS fixer config. Sets rules, line ending and risky allowed
-	 */
+    /**
+     * Creates default PHP CS fixer config. Sets rules, line ending and risky allowed
+     */
     public static function create(Finder $finder, string $name = 'default'): static
     {
-		$config = new static($name);
+        $config = new static($name);
 
-		$config->setFinder($finder)
-			->setRules(self::RULES)
-			->setLineEnding(self::LINE_ENDING)
-			->setRiskyAllowed(self::RISKY_ALLOWED);
+        $config->setFinder($finder)
+            ->setRules(self::RULES)
+            ->setLineEnding(self::LINE_ENDING)
+            ->setRiskyAllowed(self::RISKY_ALLOWED);
 
         return $config;
     }
 
-	/**
-	 * Merge provided rules with current rules.
-	 * Allows default rules to be overridden.
-	 *
-	 * @param array<string, array<string, mixed>|bool> $rules
-	 */
+    /**
+     * Recursively merges provided rules with current rules.
+     * Allows default rules to be overridden.
+     *
+     * @param array<string, array<string, mixed>|bool> $rules
+     */
     public function mergeRules(array $rules): self
     {
-		$this->setRules(array_merge($this->getRules(), $rules));
+        $this->setRules(\Ckr\Util\ArrayMerger::doMerge($this->getRules(), $rules));
 
         return $this;
     }
 
-	/**
-	 * Recursively unset matching rules
-	 *
-	 * @param array<int, string> $rulesKeys
-	 */
+    /**
+     * Recursively unset matching rules
+     *
+     * @param array<int, string> $rulesKeys
+     */
     public function removeRules(array $rulesKeys): self
     {
-		$rules = $this->getRules();
+        $rules = $this->getRules();
 
-		$this->setRules(array_diff_key($rules, array_flip($rulesKeys)));
+        $this->setRules(array_diff_key($rules, array_flip($rulesKeys)));
 
-		return $this;
+        return $this;
     }
 }
