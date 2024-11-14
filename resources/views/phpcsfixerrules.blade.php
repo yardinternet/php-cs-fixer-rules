@@ -1,1 +1,0 @@
-{{ PhpCsFixerRules::getQuote() }}
