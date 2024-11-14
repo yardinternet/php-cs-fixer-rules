@@ -6,12 +6,7 @@
 [![Code Coverage Badge](https://github.com/yardinternet/php-cs-fixer-rules/blob/badges/coverage.svg)](https://github.com/yardinternet/php-cs-fixer-rules/actions/workflows/badges.yml)
 [![Lines of Code Badge](https://github.com/yardinternet/php-cs-fixer-rules/blob/badges/lines-of-code.svg)](https://github.com/yardinternet/php-cs-fixer-rules/actions/workflows/badges.yml)
 
-
-
-## Requirements
-
-- [Sage](https://github.com/roots/sage) >= 10.0
-- [Acorn](https://github.com/roots/acorn) >= 4.0
+Enables you to easily import the Yard PHP CS Fixer rules.
 
 ## Installation
 
@@ -32,17 +27,55 @@ To install this package using Composer, follow these steps:
     composer require yard/php-cs-fixer-rules
     ```
 
-3. Run the Acorn WP-CLI command to discover this package:
-
-    ```shell
-    wp acorn package:discover
-    ```
-
-You can publish the config file with:
-
-```shell
-wp acorn vendor:publish --provider="Yard\PhpCsFixerRules\PhpCsFixerRulesServiceProvider"
-```
-
 ## Usage
 
+```php
+<?php
+
+declare(strict_types=1);
+
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
+    ->in(__DIR__)
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true)
+    ->exclude('public')
+    ->exclude('node_modules')
+    ->exclude('build')
+;
+
+return \Yard\PhpCsFixerRules\Config::setFinder($finder)
+	->mergeRules([ // allows you to add new rules or override rules from default
+ 		'declare_strict_types' => false, 
+	])
+	->setRiskyAllowed(false) // override and disable risky setting for old projects
+	->get();
+```
+
+For plugins
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
+    ->in(__DIR__)
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true)
+    ->exclude('public')
+    ->exclude('node_modules')
+    ->exclude('build')
+;
+
+// returns rules for Plugins 
+return \Yard\PhpCsFixerRules\PluginConfig::setFinder($finder)->get();
+```
