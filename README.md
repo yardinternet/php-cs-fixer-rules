@@ -32,8 +32,6 @@ To install this package using Composer, follow these steps:
 ```php
 <?php
 
-declare(strict_types=1);
-
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
@@ -53,29 +51,4 @@ return \Yard\PhpCsFixerRules\Config::setFinder($finder)
 	])
 	->setRiskyAllowed(false) // override and disable risky setting for old projects
 	->get();
-```
-
-For plugins
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use PhpCsFixer\Config;
-use PhpCsFixer\Finder;
-
-$finder = Finder::create()
-    ->in(__DIR__)
-    ->name('*.php')
-    ->notName('*.blade.php')
-    ->ignoreDotFiles(true)
-    ->ignoreVCS(true)
-    ->exclude('public')
-    ->exclude('node_modules')
-    ->exclude('build')
-;
-
-// returns rules for Plugins 
-return \Yard\PhpCsFixerRules\PluginConfig::setFinder($finder)->get();
 ```
