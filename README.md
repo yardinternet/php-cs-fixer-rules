@@ -57,14 +57,3 @@ wp acorn vendor:publish --provider="Yard\SkeletonPackage\SkeletonPackageServiceP
 
 ## Usage
 
-From a Blade template:
-
-```blade
-@include('skeleton-package::example')
-```
-
-From WP-CLI:
-
-```shell
-wp acorn example
-```
