@@ -30,7 +30,7 @@ To install this package using Composer, follow these steps:
 
 ## Usage
 
-This package enhances the PhpCsFixer\Config class (see the [ConfigInterface](src/Interfaces/ConfigInterface.php)). One
+This package enhances the `PhpCsFixer\Config` class (see the [ConfigInterface](src/Interfaces/ConfigInterface.php)). One
 can create a new configuration object by calling the static
 `create(Finder $finder, string $name = 'default'): self` method.
 
