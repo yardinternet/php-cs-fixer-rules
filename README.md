@@ -32,7 +32,7 @@ To install this package using Composer, follow these steps:
 
 This package enhances the PhpCsFixer\Config class (see the [ConfigInterface](src/Interfaces/ConfigInterface.php)). One
 can create a new configuration object by calling the static
-`create(Finder $finder, string $name = 'default'): self` methode.
+`create(Finder $finder, string $name = 'default'): self` method.
 
 ```php
 <?php
@@ -160,10 +160,10 @@ return \Yard\PhpCsFixerRules\Config::create($finder)
 
 ```
 
-### Calling native PHP CS Fixer config methodes
+### Calling native PHP CS Fixer config methods
 
-[Yard\PhpCsFixerRules\Config](src/Config.php) extends the PHP CS Fixer config object so all native methodes are
-available. Note that the native PHP CS Fixer methodes return
+[Yard\PhpCsFixerRules\Config](src/Config.php) extends the PHP CS Fixer config object so all native methods are
+available. Note that the native PHP CS Fixer methods return
 a [PhpCsFixer\ConfigInterface](./vendor/friendsofphp/php-cs-fixer/src/ConfigInterface.php) type (instead
 of [Yard\PhpCsFixerRules\Interfaces\ConfigInterface](src/Interfaces/ConfigInterface.php)).
 Your linter may not like this.
@@ -171,8 +171,8 @@ Your linter may not like this.
 ```php
 
 return \Yard\PhpCsFixerRules\Config::create($finder)
-    ->setRiskyAllowed(false) // native PHP CS Fixer methode
-    ->mergeRules([ // Yard\PhpCsFixerRules\Config methode
+    ->setRiskyAllowed(false) // native PHP CS Fixer method
+    ->mergeRules([ // Yard\PhpCsFixerRules\Config method
         'yoda_style' => [
             'equal' => false,
         ],
@@ -196,5 +196,5 @@ return \Yard\PhpCsFixerRules\Config::create($finder)
 
 ### setDefaultRules()
 
-`setDefaultRules(): self` gets called by the static `create(Finder $finder, string $name = 'default'): self` methode.
-In normal use cases there is no need to call this methode.
+`setDefaultRules(): self` gets called by the static `create(Finder $finder, string $name = 'default'): self` method.
+In normal use cases there is no need to call this method.
