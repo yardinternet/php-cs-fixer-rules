@@ -9,9 +9,14 @@ use PhpCsFixer\Finder;
 interface ConfigInterface extends \PhpCsFixer\ConfigInterface
 {
     /**
-     * Creates default PHP CS fixer config. Sets rules, line ending and risky allowed
+     * Creates default PHP CS fixer config. Calls setDefaultSettings()
      */
     public static function create(Finder $finder, string $name = 'default'): self;
+
+    /**
+     * Sets rules, line ending and risky allowed
+     */
+    public function setDefaultRules(): self;
 
     /**
      * Recursively merges provided rules with current rules.
