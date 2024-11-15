@@ -6,20 +6,33 @@ on:
             - '**.php'
 
 jobs:
-    php-cs-fixer:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-              with:
-                  ref: ${{ github.head_ref }}
-                  fetch-depth: 0
+  php-cs-fixer:
+    name: php-cs-fixer
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-            - name: Run php-cs-fixer
-              uses: docker://oskarstark/php-cs-fixer-ga
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.YARD_BOT_PAT }}
 
-            - uses: stefanzweifel/git-auto-commit-action@v5
-              with:
-                  commit_message: '(auto): apply php-cs-fixer changes'
-                  push_options: '--force'
-              env:
-                  GITHUB_TOKEN: ${{ secrets.YARD_BOT_PAT }}
+      - name: Install composer dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Run PHPStan
+        run: ./vendor/bin/php-cs-fixer fix
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '(auto): apply php-cs-fixer changes'
+          push_options: '--force'
+        env:
+          GITHUB_TOKEN: ${{ secrets.YARD_BOT_PAT }}
