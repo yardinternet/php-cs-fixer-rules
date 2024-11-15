@@ -25,13 +25,13 @@ trait Helpers
         return $config[$key] ?? $default;
     }
 
-	/**
-	 * Get specified rule from configuration.
-	 *
-	 * @param string $key key of config array
-	 */
-	public function configRule(string $key, mixed $default = null): mixed
-	{
-		return $this->config('settings', $key, $default);
-	}
+    /**
+     * Get specified rule from configuration.
+     *
+     * @param string $key key of config array
+     */
+    public function configRule(string $key, mixed $default = null): mixed
+    {
+        return $this->config('settings', $key, $default);
+    }
 }

@@ -31,21 +31,21 @@ it('sets risky allowed on create', function () {
 });
 
 it('can reset to default settings', function () {
-	$config = Config::create(Finder::create());
+    $config = Config::create(Finder::create());
 
-	$defaultRules = $config->getRules();
-	$defaultLineEnding = $config->getLineEnding();
-	$defaultRiskyAllowed = $config->getRiskyAllowed();
+    $defaultRules = $config->getRules();
+    $defaultLineEnding = $config->getLineEnding();
+    $defaultRiskyAllowed = $config->getRiskyAllowed();
 
-	$config->setRules([])
-		->setLineEnding("\t\n")
-		->setRiskyAllowed(false);
+    $config->setRules([])
+        ->setLineEnding("\t\n")
+        ->setRiskyAllowed(false);
 
-	$config->setDefaultSettings();
+    $config->setDefaultSettings();
 
-	expect($config->getRules())->toBe($defaultRules);
-	expect($config->getLineEnding())->toBe($defaultLineEnding);
-	expect($config->getRiskyAllowed())->toBe($defaultRiskyAllowed);
+    expect($config->getRules())->toBe($defaultRules);
+    expect($config->getLineEnding())->toBe($defaultLineEnding);
+    expect($config->getRiskyAllowed())->toBe($defaultRiskyAllowed);
 });
 
 it('can override all rules', function () {

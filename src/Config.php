@@ -21,19 +21,21 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
     {
         $config = new self($name);
 
-        $config->setFinder($finder)->setDefaultSettings();
+        $config->setFinder($finder);
+        $config->setDefaultSettings();
 
         return $config;
     }
 
-	public function setDefaultSettings(): self {
+    public function setDefaultSettings(): self
+    {
 
-		$this->setRules($this->configRule('rules', []))
-		->setLineEnding($this->configRule('line_ending', "\n"))
-		->setRiskyAllowed($this->configRule('risky_allowed', true));
+        $this->setRules($this->configRule('rules', []))
+            ->setLineEnding($this->configRule('line_ending', "\n"))
+            ->setRiskyAllowed($this->configRule('risky_allowed', true));
 
-		return $this;
-	}
+        return $this;
+    }
 
     public function mergeRules(array $rules): self
     {
