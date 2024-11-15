@@ -6,68 +6,56 @@ use PhpCsFixer\Finder;
 use Yard\PhpCsFixerRules\Config;
 use Yard\PhpCsFixerRules\Interfaces\ConfigInterface;
 
-it('can create config', function () {
-    $config = Config::create(Finder::create());
+beforeEach(function () {
+    $this->config = Config::create(Finder::create());
+});
 
-    expect($config)->toBeInstanceOf(ConfigInterface::class);
+it('can create config', function () {
+    expect($this->config)->toBeInstanceOf(ConfigInterface::class);
 });
 
 it('sets rules on create', function () {
-    $config = Config::create(Finder::create());
-
-    expect($config->getRules())->not->toBeEmpty();
+    expect($this->config->getRules())->not->toBeEmpty();
 });
 
 it('sets line ending on create', function () {
-    $config = Config::create(Finder::create());
-
-    expect($config->getLineEnding())->not->toBeEmpty();
+    expect($this->config->getLineEnding())->not->toBeEmpty();
 });
 
 it('sets risky allowed on create', function () {
-    $config = Config::create(Finder::create());
-
-    expect($config->getRiskyAllowed())->not->toBeEmpty();
+    expect($this->config->getRiskyAllowed())->not->toBeEmpty();
 });
 
 it('can reset to default rules using setDefaultRules()', function () {
-    $config = Config::create(Finder::create());
+    $defaultRules = $this->config->getRules();
+    $defaultLineEnding = $this->config->getLineEnding();
+    $defaultRiskyAllowed = $this->config->getRiskyAllowed();
 
-    $defaultRules = $config->getRules();
-    $defaultLineEnding = $config->getLineEnding();
-    $defaultRiskyAllowed = $config->getRiskyAllowed();
-
-    $config->setRules([])
+    $this->config->setRules([])
         ->setLineEnding("\t\n")
         ->setRiskyAllowed(false);
 
-    $config->setDefaultRules();
+    $this->config->setDefaultRules();
 
-    expect($config->getRules())->toBe($defaultRules);
-    expect($config->getLineEnding())->toBe($defaultLineEnding);
-    expect($config->getRiskyAllowed())->toBe($defaultRiskyAllowed);
+    expect($this->config->getRules())->toBe($defaultRules);
+    expect($this->config->getLineEnding())->toBe($defaultLineEnding);
+    expect($this->config->getRiskyAllowed())->toBe($defaultRiskyAllowed);
 });
 
 it('can override all rules', function () {
-    $config = Config::create(Finder::create());
+    $this->config->setRules([]);
 
-    $config->setRules([]);
-
-    expect($config->getRules())->toBeEmpty();
+    expect($this->config->getRules())->toBeEmpty();
 });
 
 it('can override line ending', function () {
-    $config = Config::create(Finder::create());
+    $this->config->setLineEnding("\t\n");
 
-    $config->setLineEnding("\t\n");
-
-    expect($config->getLineEnding())->toBe("\t\n");
+    expect($this->config->getLineEnding())->toBe("\t\n");
 });
 
 it('can override risky allowed', function () {
-    $config = Config::create(Finder::create());
+    $this->config->setRiskyAllowed(false);
 
-    $config->setRiskyAllowed(false);
-
-    expect($config->getRiskyAllowed())->toBe(false);
+    expect($this->config->getRiskyAllowed())->toBe(false);
 });
