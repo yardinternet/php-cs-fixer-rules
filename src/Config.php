@@ -68,12 +68,9 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         parent::__construct($name);
     }
 
-    /**
-     * Creates default PHP CS fixer config. Sets rules, line ending and risky allowed
-     */
-    public static function create(Finder $finder, string $name = 'default'): static
+    public static function create(Finder $finder, string $name = 'default'): self
     {
-        $config = new static($name);
+        $config = new self($name);
 
         $config->setFinder($finder)
             ->setRules(self::RULES)
@@ -83,12 +80,6 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         return $config;
     }
 
-    /**
-     * Recursively merges provided rules with current rules.
-     * Allows default rules to be overridden.
-     *
-     * @param array<string, array<string, mixed>|bool> $rules
-     */
     public function mergeRules(array $rules): self
     {
         $this->setRules(\Ckr\Util\ArrayMerger::doMerge($this->getRules(), $rules));
@@ -96,11 +87,6 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         return $this;
     }
 
-    /**
-     * Unset matching rules
-     *
-     * @param array<int, string> $rulesKeys
-     */
     public function removeRules(array $rulesKeys): self
     {
         $rules = $this->getRules();
@@ -110,9 +96,6 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         return $this;
     }
 
-    /**
-     * Removes rule name
-     */
     public function removeRule(string $ruleKey): self
     {
         return $this->removeRules([$ruleKey]);
