@@ -78,4 +78,3 @@ return \Yard\PhpCsFixerRules\Config::create($finder)
     ->removeRules(['no_unused_imports', 'trailing_comma_in_multiline'])
     ->setRiskyAllowed(false); // disable this for old sites!
 ```
- 
