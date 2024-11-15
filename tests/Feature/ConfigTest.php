@@ -29,3 +29,29 @@ it('sets risky allowed on create', function () {
 
     expect($config->getRiskyAllowed())->not->toBeEmpty();
 });
+
+it('can override all rules', function () {
+	$config = Config::create(Finder::create());
+
+	$config->setRules([]);
+
+	expect($config->getRules())->toBeEmpty();
+});
+
+it('can override line ending', function () {
+	$config = Config::create(Finder::create());
+
+	$config->setLineEnding("\t\n");
+
+	expect($config->getLineEnding())->toBe("\t\n");
+});
+
+it('can override risky allowed', function () {
+	$config = Config::create(Finder::create());
+
+	$config->setRiskyAllowed(false);
+
+	expect($config->getRiskyAllowed())->toBe(false);
+});
+
+
