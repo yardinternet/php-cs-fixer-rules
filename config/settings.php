@@ -2,24 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Yard\PhpCsFixerRules;
-
-use PhpCsFixer\Finder;
-use Yard\PhpCsFixerRules\Interfaces\ConfigInterface;
-use Yard\PhpCsFixerRules\Traits\Helpers;
-
-class Config extends \PhpCsFixer\Config implements ConfigInterface
-{
-    use Helpers;
-
-    private const LINE_ENDING = "\n";
-    private const RISKY_ALLOWED = true;
-    private const RULES = [
+return [
+    'line_ending' => '',
+    'risky_allowed' => '',
+    'rules' => [
         '@PSR2' => true,
         'indentation_type' => true,
         'array_syntax' => ['syntax' => 'short'],
-        'ordered_imports' => ['sort_algorithm' => 'alpha',
-        ],
+        'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'no_unused_imports' => true,
         'not_operator_with_successor_space' => true,
         'logical_operators' => true,
@@ -63,44 +53,5 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
             'less_and_greater' => true,
         ],
         'declare_strict_types' => true,
-    ];
-
-
-    private function __construct(string $name)
-    {
-        parent::__construct($name);
-    }
-
-    public static function create(Finder $finder, string $name = 'default'): self
-    {
-        $config = new self($name);
-
-        $config->setFinder($finder)
-            ->setRules(self::RULES)
-            ->setLineEnding(self::LINE_ENDING)
-            ->setRiskyAllowed(self::RISKY_ALLOWED);
-
-        return $config;
-    }
-
-    public function mergeRules(array $rules): self
-    {
-        $this->setRules(\Ckr\Util\ArrayMerger::doMerge($this->getRules(), $rules));
-
-        return $this;
-    }
-
-    public function removeRules(array $rulesKeys): self
-    {
-        $rules = $this->getRules();
-
-        $this->setRules(array_diff_key($rules, array_flip($rulesKeys)));
-
-        return $this;
-    }
-
-    public function removeRule(string $ruleKey): self
-    {
-        return $this->removeRules([$ruleKey]);
-    }
-}
+    ],
+];
