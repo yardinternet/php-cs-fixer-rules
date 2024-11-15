@@ -32,6 +32,6 @@ trait Helpers
      */
     public function configRule(string $key, mixed $default = null): mixed
     {
-        return $this->config('settings', $key, $default);
+        return $this->config('rules', $key, $default);
     }
 }
