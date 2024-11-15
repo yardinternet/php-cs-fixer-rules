@@ -14,7 +14,6 @@ $finder = Finder::create()
     ->ignoreVCS(true)
     ->exclude('public')
     ->exclude('node_modules')
-    ->exclude('build')
-;
+    ->exclude('build');
 
 return \Yard\PhpCsFixerRules\Config::create($finder);
