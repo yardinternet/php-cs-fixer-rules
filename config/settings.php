@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 return [
-    'line_ending' => '',
-    'risky_allowed' => '',
+    'line_ending' => "\n",
+    'risky_allowed' => true,
     'rules' => [
         '@PSR2' => true,
         'indentation_type' => true,
