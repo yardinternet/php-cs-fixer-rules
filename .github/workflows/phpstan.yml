@@ -29,8 +29,5 @@ jobs:
             - name: Install composer dependencies
               run: composer install --prefer-dist --no-interaction
 
-            - name: Dirty fix for previously defined function
-              run: sed -i -e 's#function __(#function ____(#' ./vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
-
             - name: Run PHPStan
               run: ./vendor/bin/phpstan --error-format=github
