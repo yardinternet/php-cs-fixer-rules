@@ -58,24 +58,24 @@ More complex:
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
-	->in(__DIR__)
-	->name('*.php')
-	->notName('*.blade.php')
-	->ignoreDotFiles(true)
-	->ignoreVCS(true)
-	->exclude('public')
-	->exclude('node_modules')
-	->exclude('build')
+    ->in(__DIR__)
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true)
+    ->exclude('public')
+    ->exclude('node_modules')
+    ->exclude('build')
 ;
 
 return \Yard\PhpCsFixerRules\Config::create($finder)
-	->mergeRules([
-		'yoda_style' => [
-			'equal' => false,
-		],
-	])
-	->removeRule('declare_strict_types')
-	->removeRules(['no_unused_imports', 'trailing_comma_in_multiline'])
-	->setRiskyAllowed(false); // disable this for old sites!
+    ->mergeRules([
+        'yoda_style' => [
+            'equal' => false,
+        ],
+    ])
+    ->removeRule('declare_strict_types')
+    ->removeRules(['no_unused_imports', 'trailing_comma_in_multiline'])
+    ->setRiskyAllowed(false); // disable this for old sites!
 ```
  
