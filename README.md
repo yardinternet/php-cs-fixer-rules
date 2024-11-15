@@ -6,7 +6,8 @@
 [![Code Coverage Badge](https://github.com/yardinternet/php-cs-fixer-rules/blob/badges/coverage.svg)](https://github.com/yardinternet/php-cs-fixer-rules/actions/workflows/badges.yml)
 [![Lines of Code Badge](https://github.com/yardinternet/php-cs-fixer-rules/blob/badges/lines-of-code.svg)](https://github.com/yardinternet/php-cs-fixer-rules/actions/workflows/badges.yml)
 
-Enables you to easily import the Yard PHP CS Fixer rules.
+PHP CS Fixer rules used within the WordPress team for sites and packages.
+This package centralizes formatting settings and allows for easy configuration of PHP CS Fixer.
 
 ## Installation
 
@@ -29,7 +30,9 @@ To install this package using Composer, follow these steps:
 
 ## Usage
 
-Simple example:
+This package enhances the PhpCsFixer\Config class (see the [ConfigInterface](src/Interfaces/ConfigInterface.php)). One
+can create a new configuration object by calling the static
+`create(Finder $finder, string $name = 'default'): self` methode.
 
 ```php
 <?php
@@ -49,30 +52,149 @@ $finder = Finder::create()
 return \Yard\PhpCsFixerRules\Config::create($finder);
 ```
 
-More complex:
+### Removing rules
+
+`removeRules(array $rulesKeys): self` or `removeRule(string $ruleKey): self` allows you to remove rules.
 
 ```php
-<?php
 
-use PhpCsFixer\Finder;
+/**
+ * Default rules:
+ * 
+ * [
+ *     'method_chaining_indentation' => true,
+ *     'yoda_style' => [
+ *         'always_move_variable' => true,
+ *         'equal' => true,
+ *         'identical' => true,
+ *         'less_and_greater' => true,
+ *     ],
+ *     'binary_operator_spaces' => [
+ *         'default' => 'single_space',
+ *         'operators' => [
+ *             '=>' => null,
+ *             '|' => 'no_space',
+ *         ],
+ *     ],
+ * ]
+ */
 
-$finder = Finder::create()
-    ->in(__DIR__)
-    ->name('*.php')
-    ->notName('*.blade.php')
-    ->ignoreDotFiles(true)
-    ->ignoreVCS(true)
-    ->exclude('public')
-    ->exclude('node_modules')
-    ->exclude('build');
+$config = \Yard\PhpCsFixerRules\Config::create($finder)
+    ->removeRules(['yoda_style', 'binary_operator_spaces']); 
+
+/**
+ * Expected rule set: 
+ * 
+ * [
+ *     'method_chaining_indentation' => true,
+ * ]
+ */
+
+
+return $config->removeRule('method_chaining_indentation');
+
+/**
+ * Expected rule set: []
+ */
+```
+
+### Add and override rules
+
+`mergeRules(array $rules): self` allows you to add and override rules.
+
+```php
+
+/**
+ * Default rules:
+ * 
+ * [
+ *     'yoda_style' => [
+ *         'always_move_variable' => true,
+ *         'equal' => true,
+ *         'identical' => true,
+ *         'less_and_greater' => true,
+ *     ],
+ *     'binary_operator_spaces' => [
+ *         'default' => 'single_space',
+ *         'operators' => [
+ *             '=>' => null,
+ *             '|' => 'no_space',
+ *         ],
+ *     ],
+ * ]
+ */
 
 return \Yard\PhpCsFixerRules\Config::create($finder)
     ->mergeRules([
         'yoda_style' => [
             'equal' => false,
         ],
-    ])
-    ->removeRule('declare_strict_types')
-    ->removeRules(['no_unused_imports', 'trailing_comma_in_multiline'])
-    ->setRiskyAllowed(false); // disable this for old sites!
+        'binary_operator_spaces' => [
+            'operators' => [
+                '|' => 'single_space',
+                '<>' => null,
+            ]
+        ]
+    ]); 
+
+/**
+ * Expected rule set: 
+ *  
+ * [
+ *     'yoda_style' => [
+ *         'always_move_variable' => true,
+ *         'equal' => false, // this setting changed!
+ *         'identical' => true,
+ *         'less_and_greater' => true,
+ *     ],
+ *     'binary_operator_spaces' => [
+ *         'default' => 'single_space',
+ *         'operators' => [
+ *             '=>' => null,
+ *             '|' => 'single_space', // this setting changed!
+ *             '<>' => null, // this setting was added!
+ *         ],
+ *     ],
+ * ]
+ */
+
 ```
+
+### Calling native PHP CS Fixer config methodes
+
+[Yard\PhpCsFixerRules\Config](src/Config.php) extends the PHP CS Fixer config object so all native methodes are
+available. Note that the native PHP CS Fixer methodes return
+a [PhpCsFixer\ConfigInterface](./vendor/friendsofphp/php-cs-fixer/src/ConfigInterface.php) type (instead
+of [Yard\PhpCsFixerRules\Interfaces\ConfigInterface](src/Interfaces/ConfigInterface.php)).
+Your linter may not like this.
+
+```php
+
+return \Yard\PhpCsFixerRules\Config::create($finder)
+    ->setRiskyAllowed(false) // native PHP CS Fixer methode
+    ->mergeRules([ // Yard\PhpCsFixerRules\Config methode
+        'yoda_style' => [
+            'equal' => false,
+        ],
+        'binary_operator_spaces' => [
+            'operators' => [
+                '|' => 'single_space',
+                '<>' => null,
+            ]
+        ]
+    ]);
+```
+
+## Older projects and risky fixers
+
+`RiskyAllowed` is set to [true](config/rules.php) by default. In older projects you may need to disable it.
+
+```php
+return \Yard\PhpCsFixerRules\Config::create($finder)
+    ->setRiskyAllowed(false);
+```
+
+### setDefaultRules()
+
+`setDefaultRules(): self` gets called by the static `create(Finder $finder, string $name = 'default'): self` methode.
+In normal use cases there is no need to call this methode.
