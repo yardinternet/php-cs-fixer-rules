@@ -30,7 +30,7 @@ it('sets risky allowed on create', function () {
     expect($config->getRiskyAllowed())->not->toBeEmpty();
 });
 
-it('can reset to default settings', function () {
+it('can reset to default rules using setDefaultRules()', function () {
     $config = Config::create(Finder::create());
 
     $defaultRules = $config->getRules();
@@ -41,7 +41,7 @@ it('can reset to default settings', function () {
         ->setLineEnding("\t\n")
         ->setRiskyAllowed(false);
 
-    $config->setDefaultSettings();
+    $config->setDefaultRules();
 
     expect($config->getRules())->toBe($defaultRules);
     expect($config->getLineEnding())->toBe($defaultLineEnding);

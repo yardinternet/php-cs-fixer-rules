@@ -16,4 +16,4 @@ $finder = Finder::create()
     ->exclude('node_modules')
     ->exclude('build');
 
-return \Yard\PhpCsFixerRules\Config::create($finder);
+return \Yard\PhpCsFixerRules\Config::create($finder)->setRiskyAllowed(false)->setDefaultRules();

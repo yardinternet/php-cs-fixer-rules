@@ -22,12 +22,12 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
         $config = new self($name);
 
         $config->setFinder($finder);
-        $config->setDefaultSettings();
+        $config->setDefaultRules();
 
         return $config;
     }
 
-    public function setDefaultSettings(): self
+    public function setDefaultRules(): self
     {
 
         $this->setRules($this->configRule('rules', []))
