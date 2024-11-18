@@ -3,6 +3,7 @@
 
 # WordPress Coding Standards
 # https://make.wordpress.org/core/handbook/coding-standards/
+# https://github.com/WordPress/wordpress-develop/blob/trunk/.editorconfig
 
 root = true
 
@@ -14,31 +15,14 @@ trim_trailing_whitespace = true
 indent_style = tab
 
 [*.yml]
+indent_style = space
 indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/md010.md
+# Hard tabs are often rendered inconsistently by different editors and can be harder to work with than spaces.
 indent_style = space
 
 [{*.txt,wp-config-sample.php}]
 end_of_line = crlf
-
-# ====================================================================
-# The rules above ↑this↑ line are the exact contents of WordPress' config file.'
-# Github mirror : https://github.com/WordPress/wordpress-develop/blob/trunk/.editorconfig
-# SVN original  : https://core.trac.wordpress.org/browser/trunk/.editorconfig
-
-# ======= Custom Yard rules =======
-
-[*.{js},*.{jsx}, *.{ts}, *.{tsx}]
-# This setting has precedence over VSCode user settings for tabSize
-# Not included are tab_width(tabs) or indent_size(spaces) since the user can decide
-# what they like visually, 2 vs 4 column size, as long as they use tabs. Default: 4
-# This setting also affects Prettier.
-indent_style = tab
-
-[*.scss]
-indent_style = tab
-
-[{.eslintrc,*.json,*.yml}]
-indent_style = space
