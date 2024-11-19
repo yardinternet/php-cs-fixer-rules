@@ -8,9 +8,19 @@ return [
     'rules' => [
         '@PSR2' => true,
         'indentation_type' => true,
+        'single_quote' => true,
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'no_unused_imports' => true,
+        'no_extra_blank_lines' => [
+            'tokens' => [
+                'extra',
+                'throw',
+                'continue',
+                'curly_brace_block',
+                'parenthesis_brace_block',
+            ],
+        ],
         'not_operator_with_successor_space' => true,
         'logical_operators' => true,
         'trailing_comma_in_multiline' => true,
@@ -31,8 +41,8 @@ return [
         'binary_operator_spaces' => [
             'default' => 'single_space',
             'operators' => [
-                '=>' => null,
-                '|' => 'no_space',
+                '=>' => 'single_space',
+                '|' => 'single_space',
             ],
         ],
         'return_type_declaration' => [
