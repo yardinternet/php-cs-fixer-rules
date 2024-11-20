@@ -10,52 +10,51 @@ use Yard\PhpCsFixerRules\Traits\Helpers;
 
 class Config extends \PhpCsFixer\Config implements ConfigInterface
 {
-    use Helpers;
+	use Helpers;
 
-    private function __construct(string $name)
-    {
-        parent::__construct($name);
-    }
+	private function __construct(string $name)
+	{
+		parent::__construct($name);
+	}
 
-    public static function create(Finder $finder, string $name = 'default'): self
-    {
-        $config = new self($name);
+	public static function create(Finder $finder, string $name = 'default'): self
+	{
+		$config = new self($name);
 
-        $config->setFinder($finder);
-        $config->setDefaultRules();
+		$config->setFinder($finder);
+		$config->setDefaultRules();
 
-        return $config;
-    }
+		return $config;
+	}
 
-    public function setDefaultRules(): self
-    {
-
-        $this->setRules($this->configRule('rules', []))
-            ->setLineEnding($this->configRule('line_ending', "\n"))
-            ->setRiskyAllowed($this->configRule('risky_allowed', true))
+	public function setDefaultRules(): self
+	{
+		$this->setRules($this->configRule('rules', []))
+			->setLineEnding($this->configRule('line_ending', "\n"))
+			->setRiskyAllowed($this->configRule('risky_allowed', true))
 			->setIndent($this->configRule('set_indent', "\t"));
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function mergeRules(array $rules): self
-    {
-        $this->setRules(\Ckr\Util\ArrayMerger::doMerge($this->getRules(), $rules));
+	public function mergeRules(array $rules): self
+	{
+		$this->setRules(\Ckr\Util\ArrayMerger::doMerge($this->getRules(), $rules));
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeRules(array $rulesKeys): self
-    {
-        $rules = $this->getRules();
+	public function removeRules(array $rulesKeys): self
+	{
+		$rules = $this->getRules();
 
-        $this->setRules(array_diff_key($rules, array_flip($rulesKeys)));
+		$this->setRules(array_diff_key($rules, array_flip($rulesKeys)));
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeRule(string $ruleKey): self
-    {
-        return $this->removeRules([$ruleKey]);
-    }
+	public function removeRule(string $ruleKey): self
+	{
+		return $this->removeRules([$ruleKey]);
+	}
 }
