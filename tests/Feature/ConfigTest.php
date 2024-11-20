@@ -26,6 +26,10 @@ it('sets risky allowed on create', function () {
     expect($this->config->getRiskyAllowed())->not->toBeEmpty();
 });
 
+it('sets indent on create', function () {
+	expect($this->config->getIndent())->not->toBeEmpty();
+});
+
 it('can reset to default rules using setDefaultRules()', function () {
     $defaultRules = $this->config->getRules();
     $defaultLineEnding = $this->config->getLineEnding();
@@ -58,4 +62,10 @@ it('can override risky allowed', function () {
     $this->config->setRiskyAllowed(false);
 
     expect($this->config->getRiskyAllowed())->toBe(false);
+});
+
+it('can override indent', function () {
+	$this->config->setIndent("    ");
+
+	expect($this->config->getIndent())->toBe("    ");
 });
