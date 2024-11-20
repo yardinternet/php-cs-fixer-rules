@@ -32,7 +32,8 @@ class Config extends \PhpCsFixer\Config implements ConfigInterface
 
         $this->setRules($this->configRule('rules', []))
             ->setLineEnding($this->configRule('line_ending', "\n"))
-            ->setRiskyAllowed($this->configRule('risky_allowed', true));
+            ->setRiskyAllowed($this->configRule('risky_allowed', true))
+			->setIndent($this->configRule('set_indent', "\t"));
 
         return $this;
     }

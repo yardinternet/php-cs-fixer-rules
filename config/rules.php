@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'line_ending' => "\n",
     'risky_allowed' => true,
+    'set_indent' => "\t",
     'rules' => [
         '@PSR2' => true,
         'indentation_type' => true,
