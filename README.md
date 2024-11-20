@@ -11,22 +11,9 @@ This package centralizes formatting settings and allows for easy configuration o
 
 ## Installation
 
-To install this package using Composer, follow these steps:
-
-1. Add the following to the `repositories` section of your `composer.json`:
-
-    ```json
-    {
-      "type": "vcs",
-      "url": "git@github.com:yardinternet/php-cs-fixer-rules.git"
-    }
-    ```
-
-2. Install this package with Composer:
-
-    ```sh
-    composer require yard/php-cs-fixer-rules
-    ```
+```sh
+composer require yard/php-cs-fixer-rules
+```
 
 ## Usage
 
