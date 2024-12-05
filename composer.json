@@ -13,7 +13,7 @@
 		}
 	},
 	"require": {
-		"php": ">=8.1",
+		"php": ">=7.4",
 		"ckr/arraymerger": "^3.0",
 		"friendsofphp/php-cs-fixer": "^3.64",
 		"webmozart/assert": "^1.11"
