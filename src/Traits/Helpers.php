@@ -13,8 +13,10 @@ trait Helpers
 	 *
 	 * @param string $configFile filename of config file
 	 * @param string $key key of config array
+	 * @param mixed $default default value
+	 * @return mixed
 	 */
-	public function config(string $configFile, string $key, mixed $default = null): mixed
+	public function config(string $configFile, string $key, $default = null)
 	{
 		$path = __DIR__ . "/../../config/{$configFile}.php";
 
@@ -29,8 +31,10 @@ trait Helpers
 	 * Get specified rule from configuration.
 	 *
 	 * @param string $key key of config array
+	 * @param mixed $default default value
+	 * @return mixed
 	 */
-	public function configRule(string $key, mixed $default = null): mixed
+	public function configRule(string $key, $default = null)
 	{
 		return $this->config('rules', $key, $default);
 	}
