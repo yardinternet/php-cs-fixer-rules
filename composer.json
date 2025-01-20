@@ -3,6 +3,9 @@
 	"type": "package",
 	"description": "Yard PHP CS Fixer rules",
 	"license": "MIT",
+	"keywords": [
+		"static analysis"
+	],
 	"config": {
 		"sort-packages": true,
 		"allow-plugins": {
