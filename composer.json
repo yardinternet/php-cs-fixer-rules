@@ -18,12 +18,12 @@
 	"require": {
 		"php": ">=7.4",
 		"ckr/arraymerger": "^3.0",
-		"friendsofphp/php-cs-fixer": "^3.64",
+		"friendsofphp/php-cs-fixer": "^3.88",
 		"webmozart/assert": "^1.11"
 	},
 	"require-dev": {
 		"pestphp/pest": "^2.36",
-		"phpstan/phpstan": "^2.0"
+		"phpstan/phpstan": "^2.1"
 	},
 	"autoload": {
 		"psr-4": {
