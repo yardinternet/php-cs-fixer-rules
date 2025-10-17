@@ -14,6 +14,7 @@ trait Helpers
 	 * @param string $configFile filename of config file
 	 * @param string $key key of config array
 	 * @param mixed $default default value
+	 *
 	 * @return mixed
 	 */
 	public function config(string $configFile, string $key, $default = null)
@@ -32,6 +33,7 @@ trait Helpers
 	 *
 	 * @param string $key key of config array
 	 * @param mixed $default default value
+	 *
 	 * @return mixed
 	 */
 	public function configRule(string $key, $default = null)
