@@ -185,3 +185,7 @@ return \Yard\PhpCsFixerRules\Config::create($finder)
 
 `setDefaultRules(): self` gets called by the static `create(Finder $finder, string $name = 'default'): self` method.
 In normal use cases there is no need to call this method.
+
+## About us
+
+[![banner](https://raw.githubusercontent.com/yardinternet/.github/refs/heads/main/profile/assets/small-banner-github.svg)](https://www.yard.nl/werken-bij/)
